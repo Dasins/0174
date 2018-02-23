@@ -20,6 +20,8 @@ public class Persona {
     private int caloriasIngeridas;
     // Calorias maximas.
     private int maxCalorias;
+    // Alimeto mas calorico.
+    private Comida comidaMasPesada;
     
     /* CONSTRUCTORES */
     /**
@@ -40,6 +42,8 @@ public class Persona {
         this.altura = altura;
         this.edad = edad;
         caloriasIngeridas = 0;
+        comidaMasPesada = null;
+        
         // Calculo metabolismo basal
         maxCalorias = (10 * peso) + (6 * altura) + (5 * edad);
         maxCalorias = (sexo)?maxCalorias + 5 : maxCalorias - 161; 
@@ -92,6 +96,18 @@ public class Persona {
      */
     public int getCaloriasIngeridas() {
         return caloriasIngeridas;
+    }
+    
+    /**
+     * Devuelve la comida mas calorica consumida hasta el momento o null si no la persona no ha consumido nada.
+     * @return Devuelve la comida mas calorica consumida hasta el momento.
+     * Si no ha consumido nada devuelve null.
+     */
+    public String getAlimentoMasCaloricoConsumido(){
+        if(comidaMasPesada != null) {
+            System.out.println(comidaMasPesada.getNombre());
+        }
+        return (comidaMasPesada != null)? comidaMasPesada.getNombre() : null;
     }
     
     /* METODOS SETTER */
@@ -155,6 +171,7 @@ public class Persona {
     /**
      * Da de comer la comida especificada por parametro a esta persona. 
      * Devuelve la cantidad de calorias consumidas en esa comida o -1 en caso de que no la coma.
+     * Este metodo tambien controla la comida mas pesada consumida hasta ahora. 
      * 
      * @param comida La comida que se quiere que coma la persona.
      * @return Devuelve la cantidad de calorias consumidas en esa comida.
@@ -167,6 +184,9 @@ public class Persona {
         }
         else {
             this.caloriasIngeridas += caloriasIngeridas;
+            if(comidaMasPesada == null || comidaMasPesada.getCalorias() <= caloriasIngeridas) {
+                comidaMasPesada = comida;
+            }
         }
         return caloriasIngeridas;
     }
