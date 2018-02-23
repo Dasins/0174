@@ -12,10 +12,14 @@ public class Persona {
     private boolean sexo;
     // Peso(kg).
     private int peso;
-    // Altura(cm)
+    // Altura(cm).
     private int altura;
-    // Edad (anos)
+    // Edad (anos).
     private int edad;
+    // Calorias ingeridas.
+    private int caloriasIngeridas;
+    // Calorias maximas.
+    private int maxCalorias;
     
     /* CONSTRUCTORES */
     /**
@@ -35,6 +39,10 @@ public class Persona {
         this.peso = peso;
         this.altura = altura;
         this.edad = edad;
+        caloriasIngeridas = 0;
+        // Calculo metabolismo basal
+        maxCalorias = (10 * peso) + (6 * altura) + (5 * edad);
+        maxCalorias = (sexo)?maxCalorias + 5 : maxCalorias - 161; 
     }
     
     /* METODOS GETTER */
@@ -76,6 +84,14 @@ public class Persona {
      */
     public int getEdad() {
         return edad;
+    }
+    
+    /**
+     * Devuelve las calorias ingeridas hasta el momento.
+     * @return Devuelve las calorias ingeridas hasta el momento.
+     */
+    public int getCaloriasIngeridas() {
+        return caloriasIngeridas;
     }
     
     /* METODOS SETTER */
@@ -134,6 +150,24 @@ public class Persona {
      */
     public void mostrar() {
         System.out.println(this);
+    }
+    
+    /**
+     * Da de comer la comida especificada por parametro a esta persona. 
+     * Devuelve la cantidad de calorias consumidas en esa comida o -1 en caso de que no la coma.
+     * @param comida La comida que se quiere que coma la persona.
+     * @return Devuelve la cantidad de calorias consumidas en esa comida.
+     * Si no ha ingerido nada, devuelve -1.
+     */
+    public int comer(Comida comida) {   
+        int caloriasIngeridas = comida.getCalorias();
+        if(this.caloriasIngeridas > maxCalorias) {
+            caloriasIngeridas = -1;
+        }
+        else {
+            this.caloriasIngeridas += caloriasIngeridas;
+        }
+        return caloriasIngeridas;
     }
     
 }

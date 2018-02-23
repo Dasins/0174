@@ -36,7 +36,7 @@ public class Comida {
      * Devuelve la cantidad de calorias de la comida.
      * @return Devuelve la cantidad de calorias de la comida.
      */
-    public int getcalorias() {
+    public int getCalorias() {
         return calorias;
     }
     
