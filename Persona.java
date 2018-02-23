@@ -155,6 +155,7 @@ public class Persona {
     /**
      * Da de comer la comida especificada por parametro a esta persona. 
      * Devuelve la cantidad de calorias consumidas en esa comida o -1 en caso de que no la coma.
+     * 
      * @param comida La comida que se quiere que coma la persona.
      * @return Devuelve la cantidad de calorias consumidas en esa comida.
      * Si no ha ingerido nada, devuelve -1.
@@ -168,6 +169,32 @@ public class Persona {
             this.caloriasIngeridas += caloriasIngeridas;
         }
         return caloriasIngeridas;
+    }
+    
+    /**
+     * Responde a las pregunta del usuario pasada por parametro.
+     * 
+     * @param pregunta La pregunta del usuario.                                                                     
+     * Cuando no ha sobrepasado el metabolismo basal, si el numero de caracteres de la pregunta es divisible por tres, 
+     * responde [SI]. En caso contrario [NO].
+     * Cuando ha sobrepasado su maximo de calorias o la pregunta contiene el nombre de la persona, 
+     * responde con la pregunta del usuario en mayusculas.
+     * 
+     * @return Devuelve la respuesta a la pregunta. Las respuestas pueden no tener mucho sentido para el usuario.
+     */
+    public String contestar(String pregunta) {
+        String respuesta = "";
+        if(caloriasIngeridas > maxCalorias || pregunta.indexOf(nombre) != -1){
+            respuesta = pregunta.toUpperCase();
+        }
+        else if(pregunta.length() % 3 == 0) {
+            respuesta = "SI";
+        }
+        else {
+            respuesta = "NO";
+        }
+        System.out.println(respuesta);
+        return respuesta;
     }
     
 }
